@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Home</title>
+    <div th:replace="fragment/layout::head"></div>
+</head>
+<body class="">
+
+<div th:replace="fragment/layout::header"></div>
+
+<div class="container-fluid m-0 p-4">
+
+    <a class="mb-2 btn btn-primary" th:href="@{/course/register}" style="width: 100px">
+        NEW
+    </a>
+
+    <table class="table">
+        <thead class="thead-light">
+        <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Name</th>
+            <th scope="col">code</th>
+            <th scope="col">max</th>
+            <th scope="col">Created course</th>
+            <th scope="col">Update course</th>
+            <th scope="col">Operation</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="Course:${course}">
+        	<td th:text="${Course.getId()}"></td>
+            <td scope="row" th:text="${Course.getName()}"></td>
+            <td th:text="${Course.getCode()}"></td>
+            <td th:text="${Course.getMax()}"></td>
+            <td th:text="${#temporals.format(Course.getCreatedAt(),'yyyy-MM-dd HH:mm')}"></td>
+            <td th:text="${#temporals.format(Course.getUpdatedAt(),'yyyy-MM-dd HH:mm')}"></td>
+            <td>
+                <a class="btn btn-success" th:href="@{/course/edit/{id}(id=${Course.getId()})}" style="width: 80px">Edit</a>
+                <a class="btn btn-danger" th:href="@{/course/delete/{id}(id=${Course.getId()})}" style="width: 80px">Delete</a>
+            </td>
+        </tr>
+        
+        </tbody>
+    </table>
+
+</div>
+
+
+</body></html>
