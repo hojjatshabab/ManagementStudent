@@ -6,26 +6,26 @@
     <title>Home</title>
     <div th:replace="fragment/layout::head"></div>
 </head>
-<body class="">
+<body class="decore">
 
 <div th:replace="fragment/layout::header"></div>
 
 <div class="container-fluid m-0 p-4">
+    <h1 style="text-align: center">جدول دروس</h1>
 
-    <a class="mb-2 btn btn-primary" th:href="@{/course/register}" style="width: 100px">
-        NEW
+    <a class="mb-2 btn btn-primary" th:href="@{/course/register}" style="width: 100px;float: right;">
+        افزودن
     </a>
 
-    <table class="table">
+    <table class="table" >
         <thead class="thead-light">
         <tr>
-            <th scope="col">ID</th>
-            <th scope="col">Name</th>
-            <th scope="col">code</th>
-            <th scope="col">max</th>
-            <th scope="col">Created course</th>
-            <th scope="col">Update course</th>
-            <th scope="col">Operation</th>
+            <th scope="col">#</th>
+            <th scope="col">نام</th>
+            <th scope="col">کد درس</th>
+            <th scope="col">ظرفیت</th>
+            <th scope="col">تاریخ ثبت</th>
+            <th scope="col">عملگرها</th>
         </tr>
         </thead>
         <tbody>
@@ -34,11 +34,10 @@
             <td scope="row" th:text="${Course.getName()}"></td>
             <td th:text="${Course.getCode()}"></td>
             <td th:text="${Course.getMax()}"></td>
-            <td th:text="${#temporals.format(Course.getCreatedAt(),'yyyy-MM-dd HH:mm')}"></td>
             <td th:text="${#temporals.format(Course.getUpdatedAt(),'yyyy-MM-dd HH:mm')}"></td>
             <td>
-                <a class="btn btn-success" th:href="@{/course/edit/{id}(id=${Course.getId()})}" style="width: 80px">Edit</a>
-                <a class="btn btn-danger" th:href="@{/course/delete/{id}(id=${Course.getId()})}" style="width: 80px">Delete</a>
+                <a class="btn btn-success" th:href="@{/course/edit/{id}(id=${Course.getId()})}" style="width: 80px">ویرایش</a>
+                <a class="btn btn-danger" th:href="@{/course/delete/{id}(id=${Course.getId()})}" style="width: 80px">حذف</a>
             </td>
         </tr>
         

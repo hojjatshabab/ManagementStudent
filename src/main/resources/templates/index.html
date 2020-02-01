@@ -10,9 +10,9 @@
 
 <div th:replace="fragment/layout::header"></div>
 
-<div class="container-fluid mt-3 pl-5 pr-5" style="background-color: gray">
+<div class="container-fluid mt-3 pl-5 pr-5 decore" style="background-color: gray">
 
-    <a class="text-dark" href="#" th:each="post : ${posts}">
+    <a class="text-dark" href="#" th:each="post : ${posts}" style="float: right">
         <div class="card mr-3 mb-4" style="width: 17rem; height: 400px; float: left; ">
             <img alt="Card image cap" class="card-img-top border-bottom border-secondary"
                  style="width: 16.8rem; height: 16rem; object-fit: contain; margin: auto;"
@@ -23,8 +23,8 @@
                 </p>
             </div>
             <div class="card-footer">
-                <p class="text-center small text-muted m-0 p-0" th:text="'Last Update : ' +
-                 ${#temporals.format(post.getUpdatedAt(),'yyyy-MM-dd HH:mm')}"></p>
+                <p class="text-center small text-muted m-0 p-0" th:text="'آخرین بروزرسانی: ' +
+                 ${#temporals.format(post.getUpdatedAt(),'yyyy-MM-dd')}"></p>
             </div>
         </div>
     </a>

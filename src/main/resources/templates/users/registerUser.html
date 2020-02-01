@@ -11,13 +11,13 @@
 
 <div th:replace="fragment/layout::header"></div>
 
-<div class="mt-3" style="width: 500px; margin: auto; font-size: 36px;">Register User</div>
+<div class="mt-3" style="width: 500px; margin: auto; font-size: 36px;">ثبت کاربر</div>
 
 <div class="mt-2 mb-4" style="width:500px; margin:auto; padding: 20px; border: 1px solid #e4e2dd">
-    <form th:action="@{/users/register}" method="post" th:object="${user}" enctype="multipart/form-data">
+    <form th:action="@{/users/register}" method="post" th:object="${user}" enctype="multipart/form-data" class="decore">
         <input type="hidden" th:field="*{id}">
         <div class="form-group row">
-            <label class="col-form-label col-sm-3" for="title">Email : </label>
+            <label class="col-form-label col-sm-3" for="title">ایمیل:</label>
             <div class="col-sm-9">
                 <input class="form-control" id="title" th:field="*{email}" type="text">
                 <div class="validation" th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></div>
@@ -25,7 +25,7 @@
         </div>
 
         <div class="form-group row">
-            <label class="col-form-label col-sm-3" for="password">Password : </label>
+            <label class="col-form-label col-sm-3" for="password">رمز:</label>
             <div class="col-sm-9">
                 <input class="form-control" id="password" th:field="*{password}" type="password">
                 <div class="validation" th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></div>
@@ -33,7 +33,7 @@
         </div>
 
         <div class="form-group row">
-            <label class="col-form-label col-sm-3" for="name">Name : </label>
+            <label class="col-form-label col-sm-3" for="name">نام:</label>
             <div class="col-sm-9">
                 <input class="form-control" id="name" th:field="*{name}" type="text">
                 <div class="validation" th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
@@ -41,7 +41,7 @@
         </div>
 
         <div class="form-group row">
-            <label class="col-form-label col-sm-3" for="cat">Categories : </label>
+            <label class="col-form-label col-sm-3" for="cat">سطح دسترسی:</label>
             <div class="col-sm-9">
                 <select class="selectpicker" id="cat" multiple th:field="*{roles}">
                     <option th:each="role : ${T(ir.arcademy.blog.enums.Roles).values()}"
@@ -54,7 +54,7 @@
 
 
         <div class="form-group row">
-            <label class="col-form-label col-sm-3" for="cover">Cover : </label>
+            <label class="col-form-label col-sm-3" for="cover">عکس:</label>
             <div class="col-sm-9">
                 <input class="form-control-file" id="cover" th:field="*{file}" type="file">
             </div>
@@ -63,7 +63,7 @@
         <div class="row">
             <div class="col-sm-7"></div>
             <div class="col-sm-5">
-                <input class="btn btn-primary form-control" type="submit">
+                <input class="btn btn-primary form-control" type="submit" value="ثبت">
             </div>
         </div>
 

@@ -12,3 +12,6 @@ a.text-dark:hover .card-body {
     content: '*';
     margin-right: 3px;
 }
+.decore {
+    direction: rtl;
+}

@@ -14,17 +14,18 @@
 <div th:replace="fragment/layout::header"></div>
 
 <div class="container-fluid m-0 p-4">
+    <h1 style="text-align: center">جدول پست ها</h1>
 
     <div>
-        <a class="mb-2 btn btn-primary" style="width: 100px; float: left" th:href="@{/posts/register}">
-            NEW
+        <a class="mb-2 btn btn-primary" style="width: 100px; float: right" th:href="@{/posts/register}">
+            افزودن
         </a>
 
-        <nav aria-label="Page navigation example" style="float: right">
+        <nav aria-label="Page navigation example" style="float: left">
             <ul class="pagination">
                 <li class="page-item" th:classappend="${posts.first} ? disabled">
                     <a class="page-link"
-                       th:href="@{/posts(page=${posts.number - 1})}">Previous</a></li>
+                       th:href="@{/posts(page=${posts.number - 1})}">قبل</a></li>
 
                 <li class="page-item"
                     th:classappend="${posts.number == i} ? active"
@@ -34,23 +35,23 @@
                        th:href="@{${url.replaceQueryParam('page').toUriString()}(page=${i})}">[[${i + 1}]]</a></li>
 
                 <li class="page-item" th:classappend="${posts.last} ? disabled">
-                    <a class="page-link" th:href="@{/posts(page=${posts.number + 1})}">Next</a></li>
+                    <a class="page-link" th:href="@{/posts(page=${posts.number + 1})}">بعد</a></li>
             </ul>
         </nav>
 
     </div>
 
-    <form id="searchForm" th:action="@{/posts}" method="get">
+    <form id="searchForm" th:action="@{/posts}" method="get" style="direction: rtl">
         <table class="table">
             <thead class="thead-light">
             <tr>
-                <th scope="col">ID</th>
-                <th scope="col">Title</th>
-                <th scope="col">Categories</th>
-                <th scope="col">Created By</th>
-                <th scope="col">Created Date</th>
-                <th scope="col">Updated Date</th>
-                <th scope="col">Operation</th>
+                <th scope="col">#</th>
+                <th scope="col">موضوع</th>
+                <th scope="col">عناوین</th>
+                <th scope="col">سازنده</th>
+                <th scope="col">تاریخ ساخت</th>
+                <th scope="col">تاریخ ویرایش</th>
+                <th scope="col">عملگرها</th>
             </tr>
             <tr>
                 <th scope="col"></th>
@@ -68,7 +69,7 @@
                 <th></th>
                 <th></th>
                 <th></th>
-                <th><button type="submit" class="btn btn-info" style="width: 166px">Search</button> </th>
+                <th><button type="submit" class="btn btn-info" style="width: 166px">جستجو</button> </th>
             </tr>
             </thead>
             <tbody>
@@ -78,7 +79,7 @@
 
                 <td>
                     <ul>
-                        <li th:each="category : ${post.categories}" th:text="${category.title}"></li>
+                        <li style="direction: rtl;" th:each="category : ${post.categories}" th:text="${category.title}"></li>
                     </ul>
                 </td>
 
@@ -88,13 +89,13 @@
                 <td th:text="${#temporals.format(post.updatedAt,'yyyy-MM-dd HH:mm')}"></td>
                 <td>
                     <a class="btn btn-success"
-                       style="width: 80px" th:href="@{/posts/edit/{id}(id=${post.getId()})}">Edit</a>
+                       style="width: 80px" th:href="@{/posts/edit/{id}(id=${post.getId()})}">ویرایش</a>
 
                     <a class="btn btn-danger"
                        data-toggle="modal"
                        href="#"
                        style="width: 80px" th:data-target="'#delete'+${post.getId()}">
-                        Delete
+                        حذف
                     </a>
 
                     <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" role="dialog"
@@ -102,20 +103,20 @@
                         <div class="modal-dialog" role="document">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h5 class="modal-title" id="exampleModalLabel">Delete Post</h5>
+                                    <h5 class="modal-title" id="exampleModalLabel">حذف پست</h5>
                                     <button aria-label="Close" class="close" data-dismiss="modal" type="button">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
                                 <div class="modal-body">
-                                    <span th:text="'Are You Sure to Delete '"></span>
+                                    <span th:text="'آیا مطمئن هستید به حذف'"></span>
                                     <strong th:text="${post.getTitle()}"></strong>
-                                    <span th:text="' ?'"></span>
+                                    <span th:text="' ؟'"></span>
                                 </div>
                                 <div class="modal-footer">
-                                    <button class="btn btn-secondary" data-dismiss="modal" type="button">Close</button>
+                                    <button class="btn btn-secondary" data-dismiss="modal" type="button">بستن</button>
                                     <a class="btn btn-danger"
-                                       th:href="@{/posts/delete/{id}(id=${post.getId()})}">Delete</a>
+                                       th:href="@{/posts/delete/{id}(id=${post.getId()})}">حذف</a>
                                 </div>
                             </div>
                         </div>
