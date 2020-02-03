@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<!-- saved from url=(0044)file:///D:/Project/bootstrap/blog/users.html -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta content="text/html; charset=UTF-8" http-equiv="Content-Type">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Users</title>
+    <div th:replace="fragment/layout::head"></div>
+</head>
+<body class="decore">
+
+<div th:replace="fragment/layout::header"></div>
+
+<div class="container-fluid m-0 p-4">
+    <h1 style="text-align: center">جدول کاربران</h1>
+
+    <a class="mb-2 btn btn-primary" style="width: 100px;float: right;" th:href="@{/users/register}">
+        اضافه کردن
+    </a>
+
+    <table class="table">
+        <thead class="thead-light">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">ایمیل</th>
+            <th scope="col">نام</th>
+            <th scope="col">عملگرها</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="user : ${users}">
+            <th scope="row" th:text="${user.getId()}"></th>
+            <td th:text="${user.getEmail()}"></td>
+            <td th:text="${user.getName()}"></td>
+            <td>
+                <a class="btn btn-success" style="width: 80px"
+                   th:href="@{/users/edit/{id}(id=${user.getId()})}">ویرایش</a>
+
+                <a class="btn btn-danger"
+                   data-toggle="modal"
+                   href="#"
+                   style="width: 80px" th:data-target="'#delete'+${user.getId()}">
+                    حذف
+                </a>
+
+                <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" role="dialog"
+                     tabindex="-1" th:id="'delete'+${user.getId()}">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">حذف کاربر</h5>
+                                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <span th:text="'آیا مطمئن هستید به حذف'"></span>
+                                <strong th:text="${user.getEmail()}"></strong>
+                                <span th:text="' ؟'"></span>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" data-dismiss="modal" type="button">بستن</button>
+                                <a class="btn btn-danger"
+                                   th:href="@{/users/delete/{id}(id=${user.getId()})}">حذف</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+
+</body>
+</html>
