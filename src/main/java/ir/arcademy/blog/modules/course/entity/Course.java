@@ -28,7 +28,7 @@ public class Course {
  
     private String name;
   
-    private String code;
+    private int code;
     
     private int max; 
 
@@ -48,7 +48,7 @@ public class Course {
     
     public Course() {}
 
-    public Course(String name, String code, int max) {
+    public Course(String name, int code, int max) {
         this.name = name;
         this.code=code;
         this.max=max;
@@ -102,11 +102,11 @@ public class Course {
         return name;
     }
 
-	public String getCode() {
+	public int getCode() {
 		return code;
 	}
 
-	public void setCode(String code) {
+	public void setCode(int code) {
 		this.code = code;
 	}
 

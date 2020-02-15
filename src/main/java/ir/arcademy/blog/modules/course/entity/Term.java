@@ -1,5 +1,6 @@
 package ir.arcademy.blog.modules.course.entity;
 
+import ir.arcademy.blog.modules.posts.model.Posts;
 import ir.arcademy.blog.modules.users.model.Users;
 import org.apache.catalina.User;
 
@@ -14,6 +15,9 @@ public class Term {
     private Integer id;
     @Column(name = "title", length = 45)
     private String title;
+
+  //  @OneToMany(mappedBy = "term")
+ //   private List<Course> course;
 //    @OneToMany
 //    @JoinColumn(name = "termId")
 //    private List<Course> courses;

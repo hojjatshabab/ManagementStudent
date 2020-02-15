@@ -49,10 +49,10 @@ public class CourseService {
 
 
 	@Transactional
-	public Course registerCourse(Course book) {
-		return this.courseRepository.save(book);
+	public Course registerCourse(Course course) {
+		return this.courseRepository.save(course);
 	}
-	
+
 	public List<Course> findAllCourse(){
 		return (List<Course>) this.courseRepository.findAll();
 	}
@@ -84,8 +84,6 @@ public class CourseService {
 	public List<UserCourse> findAllUserCourse(UserTerm term){
 		return this.userCourseRepository.findAllByTerm(term);
 	}
-
-
 
 	@Transactional
 	public void deleteById(Long id) {

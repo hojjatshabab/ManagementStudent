@@ -3,6 +3,7 @@ package ir.arcademy.blog.modules.course.controller;
 
 
 import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
 import java.security.Principal;
 import java.util.List;
 
@@ -10,17 +11,17 @@ import ir.arcademy.blog.modules.course.entity.Course;
 import ir.arcademy.blog.modules.course.entity.Term;
 import ir.arcademy.blog.modules.course.entity.UserTerm;
 import ir.arcademy.blog.modules.course.service.CourseService;
+import ir.arcademy.blog.modules.course.service.TermService;
+import ir.arcademy.blog.modules.posts.model.Posts;
 import ir.arcademy.blog.modules.users.model.Users;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 
 
 @Controller
@@ -28,12 +29,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class CourseController {
 	
 	private CourseService courseService;
+	private TermService termService;
 
 
 	
 	@Autowired
-	public CourseController(CourseService courseService) {
+	public CourseController(CourseService courseService,TermService termService) {
 		this.courseService=courseService;
+		this.termService=termService;
 
 	}
 	
@@ -63,9 +66,18 @@ public class CourseController {
 
 		return "course/bookpage";
 	}
+
+	@RequestMapping(value = "selectunit", method = RequestMethod.GET)
+	public String categories(Model model) {
+		model.addAttribute("course", courseService.findAllCourse());
+		return "selectcourse/selectcourse";
+	}
+
+
 	@GetMapping("register")
 	public String registerPage(Model model) {
 		model.addAttribute("course", new Course());
+		model.addAttribute("term", termService.findAllTerms());
 		return "course/registerBook";
 	}
 	@PostMapping("register")
@@ -73,7 +85,7 @@ public class CourseController {
 		courseService.registerCourse(course);
 		return "redirect:/course/list";
 	}
-	
+
 	
 	@GetMapping("edit/{id}")
 	public String editPage(Model model,@PathVariable("id") Long id) {

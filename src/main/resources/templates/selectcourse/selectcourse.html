@@ -1,21 +1,19 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Home</title>
+    <title>select unit</title>
     <div th:replace="fragment/layout::head"></div>
 </head>
 <body class="decore">
 
 <div th:replace="fragment/layout::header"></div>
 
-<div class="container-fluid m-0 p-4">
-    <h1 style="text-align: center">جدول دروس</h1>
 
-    <a class="mb-2 btn btn-primary" th:href="@{/course/register}" style="width: 100px;float: right;">
-        افزودن
-    </a>
+<div class="container-fluid m-0 p-4">
+    <h1 style="text-align: center">جدول انتخاب واحد</h1>
 
     <table class="table" >
         <thead class="thead-light">
@@ -25,34 +23,29 @@
             <th scope="col">کد درس</th>
             <th scope="col">ظرفیت</th>
             <th scope="col">واحد</th>
-            <th scope="col">ترم</th>
             <th scope="col">تاریخ ثبت</th>
             <th scope="col">عملگرها</th>
         </tr>
         </thead>
         <tbody>
         <tr th:each="Course:${course}">
-        	<td th:text="${Course.getId()}"></td>
+            <td th:text="${Course.getId()}"></td>
             <td scope="row" th:text="${Course.getName()}"></td>
             <td th:text="${Course.getCode()}"></td>
             <td th:text="${Course.getMax()}"></td>
             <td th:text="${Course.getUnit()}"></td>
-            <td>
-                <ul>
-                    <li style="direction: rtl;" th:each="Term : ${Course.term}" th:text="${Term.title}"></li>
-                </ul>
-            </td>
             <td th:text="${#temporals.format(Course.getUpdatedAt(),'yyyy-MM-dd HH:mm')}"></td>
             <td>
-                <a class="btn btn-success" th:href="@{/course/edit/{id}(id=${Course.getId()})}" style="width: 80px">ویرایش</a>
-                <a class="btn btn-danger" th:href="@{/course/delete/{id}(id=${Course.getId()})}" style="width: 80px">حذف</a>
+                <form action="#" th:action="@{/cart/add}" method="post">
+                    <input type="hidden" th:value="${Course.id}" name="id"/>
+                    <button class="btn btn-success" type="submit">انتخاب واحد</button>
+                </form>
             </td>
         </tr>
-        
+
         </tbody>
-    </table>
 
+</table>
 </div>
-
-
-</body></html>
+</body>
+</html>

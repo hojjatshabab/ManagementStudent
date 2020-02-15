@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta content="width=device-width, initial-scale=1" name="viewport">
+    <title>Categories</title>
+    <div th:replace="fragment/layout::head"></div>
+</head>
+<body class="decore">
+
+<div th:replace="fragment/layout::header"></div>
+
+<div class="container-fluid m-0 p-4">
+    <h1 style="text-align: center">جدول ترم ها</h1>
+    <a class="mb-2 btn btn-primary" style="width: 100px;float: right;" th:href="@{/term/register}">
+        افزودن
+    </a>
+
+
+    <table class="table">
+        <thead class="thead-light">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">عنوان</th>
+            <th scope="col">عملگرها</th>
+        </tr>
+        </thead>
+
+        <tbody>
+        <tr th:each=" Term : ${term}">
+            <th scope="row" th:text="${Term.id}"></th>
+            <td th:text="${Term.getTitle()}"></td>
+            <td>
+                <a class="btn btn-success" style="width: 80px"
+                   th:href="@{/term/edit/{id}(id=${Term.getId()})}">ویرایش</a>
+                <a class="btn btn-danger"
+                   data-toggle="modal"
+                   href="#"
+                   style="width: 80px" th:data-target="'#delete'+${Term.getId()}">
+                    حذف
+                </a>
+
+                <div aria-hidden="true" aria-labelledby="exampleModalLabel" class="modal fade" role="dialog"
+                     tabindex="-1" th:id="'delete'+${Term.getId()}">
+                    <div class="modal-dialog" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">حذف عنوان</h5>
+                                <button aria-label="Close" class="close" data-dismiss="modal" type="button">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <span th:text="'آیا مطمئن هستید به حذف'"></span>
+                                <strong th:text="${Term.getTitle()}"></strong>
+                                <span th:text="' ؟'"></span>
+                            </div>
+                            <div class="modal-footer">
+                                <button class="btn btn-secondary" data-dismiss="modal" type="button">بستن</button>
+                                <a class="btn btn-danger" th:href="@{/categories/delete/{id}(id=${Term.getId()})}">حذف</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+</body>
+</html>
