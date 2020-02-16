@@ -23,9 +23,11 @@ public class UserCourse {
     private LocalDateTime updatedAt;
     private Integer unit;
 
-    @ManyToOne()
+    @ManyToOne(cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REFRESH})
     @JoinColumn(name = "userTermId")
     private UserTerm term;
+
+
 
     public Integer getId() {
         return id;

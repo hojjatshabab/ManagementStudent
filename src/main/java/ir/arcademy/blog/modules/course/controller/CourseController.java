@@ -14,6 +14,7 @@ import ir.arcademy.blog.modules.course.service.CourseService;
 import ir.arcademy.blog.modules.course.service.TermService;
 import ir.arcademy.blog.modules.posts.model.Posts;
 import ir.arcademy.blog.modules.users.model.Users;
+import ir.arcademy.blog.modules.users.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -30,13 +31,15 @@ public class CourseController {
 	
 	private CourseService courseService;
 	private TermService termService;
+	private UsersService usersService;
 
 
 	
 	@Autowired
-	public CourseController(CourseService courseService,TermService termService) {
+	public CourseController(CourseService courseService,TermService termService,UsersService usersService) {
 		this.courseService=courseService;
 		this.termService=termService;
+		this.usersService = usersService;
 
 	}
 	
@@ -68,11 +71,27 @@ public class CourseController {
 	}
 
 	@RequestMapping(value = "selectunit", method = RequestMethod.GET)
-	public String categories(Model model) {
+	public String showAllUnit(Model model) {
 		model.addAttribute("course", courseService.findAllCourse());
 		return "selectcourse/selectcourse";
 	}
 
+
+	/*@RequestMapping(value = "selectuserterm", method = RequestMethod.POST)
+	public String selectUserTerm(@PathVariable Integer id, Model model, Principal principal) {
+		UserTerm userTerm = new UserTerm();
+		UserTerm resultUserTerm = this.courseService.createUserTerm(userTerm,principal.getName());
+		Users email = usersService.findByEmail(principal.getName());
+		courseService.createUserTerm(resultUserTerm,email);
+		model.addAttribute("course", );
+		return "selectcourse/selectcourse";
+	}*/
+
+	@RequestMapping(value = "selectuserterm", method = RequestMethod.GET)
+	public String selectUserTermPage(Model model) {
+		model.addAttribute("term", termService.findAllTerms());
+		return "selectTerm/registerTerms";
+	}
 
 	@GetMapping("register")
 	public String registerPage(Model model) {

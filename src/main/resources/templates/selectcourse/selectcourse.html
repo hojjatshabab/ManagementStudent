@@ -36,7 +36,7 @@
             <td th:text="${Course.getUnit()}"></td>
             <td th:text="${#temporals.format(Course.getUpdatedAt(),'yyyy-MM-dd HH:mm')}"></td>
             <td>
-                <form action="#" th:action="@{/cart/add}" method="post">
+                <form th:object="${Course}" th:action="@{'/selectcourse/{id}'}">
                     <input type="hidden" th:value="${Course.id}" name="id"/>
                     <button class="btn btn-success" type="submit">انتخاب واحد</button>
                 </form>

@@ -5,6 +5,7 @@ package ir.arcademy.blog.modules.course.entity;
 
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.*;
@@ -45,6 +46,7 @@ public class Course {
     @JoinColumn(name = "termId")
     private Term term;
 
+
     
     public Course() {}
 
@@ -57,8 +59,10 @@ public class Course {
     
 //    @ManyToMany(mappedBy = "course")
 //    private List<Users> users;
-    
-    
+
+
+
+
     public int getMax() {
 		return max;
 	}
@@ -146,4 +150,6 @@ public class Course {
 //                ", term=" + term +
                 '}';
     }
+
+
 }

@@ -1,5 +1,7 @@
 package ir.arcademy.blog.modules.users.controller;
 
+import ir.arcademy.blog.modules.course.entity.Course;
+import ir.arcademy.blog.modules.course.service.CourseService;
 import ir.arcademy.blog.modules.users.model.Users;
 import ir.arcademy.blog.modules.users.service.UsersService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
+import java.security.Principal;
 import java.util.List;
 
 @Controller
@@ -18,10 +21,12 @@ import java.util.List;
 public class UsersController {
 
     private UsersService usersService;
+    private CourseService courseService;
 
     @Autowired
-    public UsersController(UsersService usersService) {
+    public UsersController(UsersService usersService,CourseService courseService) {
         this.usersService = usersService;
+        this.courseService = courseService;
     }
 
     @RequestMapping(value = "", method = RequestMethod.GET)
@@ -57,17 +62,7 @@ public class UsersController {
         return "redirect:/users";
     }
 
-    @RequestMapping(value = "/rest/getUsers", method = RequestMethod.GET)
-    public @ResponseBody
-    List<Users> getUsers() {
-        return usersService.findAllUsers();
-    }
 
-    @RequestMapping(value = "/rest/register", method = RequestMethod.POST)
-    public @ResponseBody
-    Users registerUser(@RequestBody Users users) throws IOException, InvocationTargetException, IllegalAccessException {
-        return usersService.registerUser(users);
-    }
 
 
 }

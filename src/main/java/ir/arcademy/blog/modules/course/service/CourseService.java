@@ -90,6 +90,38 @@ public class CourseService {
 		courseRepository.deleteById(id);
 		
 	}
+	@Transactional
+	public UserTerm createUserTerm(UserTerm userTerm,String email){
+		if(userTerm == null){
+			return null;
+		}
+		if(email != null){
+			Users users = this.usersRepository.findByEmail(email);
+			if(users == null){
+				return null;
+			}
+			userTerm.setUsers(users);
+			return this.userTermRepository.save(userTerm);
+		}
+		else{
+			return null;
+		}
+	}
+
+	@Transactional
+	public void addCourseToUserTerm(List<UserCourse> courses,Integer termId) {
+		if (termId != null) {
+			Optional<UserTerm> userTermOptional = this.userTermRepository.findById(termId);
+			UserTerm userTerm = userTermOptional.orElse(null);
+
+			if (userTerm != null) {
+				userTerm.setUserCourses(courses);
+				this.userTermRepository.save(userTerm);
+			} else {
+				System.out.println("UserTerm does not exist...................");
+			}
+		}
+	}
 	
 
 }

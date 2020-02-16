@@ -3,6 +3,7 @@ package ir.arcademy.blog.modules.course.entity;
 import ir.arcademy.blog.modules.users.model.Users;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Entity
 public class UserTerm {
@@ -15,6 +16,17 @@ public class UserTerm {
     @OneToOne
     @JoinColumn(name = "userId")
     private Users users;
+
+    @OneToMany(mappedBy = "term",cascade = {CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REFRESH})
+    private List<UserCourse> userCourses;
+
+    public List<UserCourse> getUserCourses() {
+        return userCourses;
+    }
+
+    public void setUserCourses(List<UserCourse> userCourses) {
+        this.userCourses = userCourses;
+    }
 
     public Integer getId() {
         return id;

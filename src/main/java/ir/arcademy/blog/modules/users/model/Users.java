@@ -19,6 +19,7 @@ import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.security.Principal;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -69,6 +70,10 @@ public class Users implements Serializable , Principal {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
+  /*  @ManyToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinTable(name = "USER_COURSES", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "course_id"))
+    private List<Course> course = new ArrayList<>();*/
+
 //    @ManyToMany(cascade ={CascadeType.PERSIST,CascadeType.MERGE,CascadeType.REFRESH})
 //    @JoinColumn()
 ////    @JoinTable(
@@ -89,6 +94,22 @@ public class Users implements Serializable , Principal {
         this.cover = cover;
     }
 
+   /* public void addCourse(Course course) {
+        course.add(course);
+    }
+
+    public void removeAllCourse(){
+        course.clear();
+    }
+
+    public double sum() {
+        return course.stream().mapToDouble(Course::getUnit).sum();
+    }
+
+    public void removeProduct(Course course) {
+        course.remove(course);
+    }*/
+
 //    public List<Course> getCourse() {
 //        return course;
 //    }
@@ -106,6 +127,15 @@ public class Users implements Serializable , Principal {
 //        this.terms = terms;
 //    }
 
+
+  /*  public List<Course> getCourse() {
+        return course;
+    }
+
+    public void setCourse(List<Course> course) {
+        this.course = course;
+    }
+*/
     public MultipartFile getFile() {
         return file;
     }
@@ -193,4 +223,6 @@ public class Users implements Serializable , Principal {
     public void setUpdatedAt(LocalDateTime updatedAt) {
         this.updatedAt = updatedAt;
     }
+
+
 }
