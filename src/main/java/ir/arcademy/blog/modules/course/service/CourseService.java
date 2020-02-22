@@ -86,6 +86,12 @@ public class CourseService {
 	}
 
 	@Transactional
+	public UserTerm findByIdUserTerm(Integer id) {
+		return userTermRepository.getOne(id);
+	}
+
+
+	@Transactional
 	public void deleteById(Long id) {
 		courseRepository.deleteById(id);
 		

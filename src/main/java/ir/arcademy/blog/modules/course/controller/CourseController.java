@@ -9,6 +9,7 @@ import java.util.List;
 
 import ir.arcademy.blog.modules.course.entity.Course;
 import ir.arcademy.blog.modules.course.entity.Term;
+import ir.arcademy.blog.modules.course.entity.UserCourse;
 import ir.arcademy.blog.modules.course.entity.UserTerm;
 import ir.arcademy.blog.modules.course.service.CourseService;
 import ir.arcademy.blog.modules.course.service.TermService;
@@ -59,15 +60,19 @@ public class CourseController {
 
 		System.out.println("=======================");
 		System.out.println(userTerms);
-
-		//List<Term> terms = this.courseService.findAllTerms(users);
-	//	System.out.println("Terms ======> "+terms);
-		//List<Course> allCourse = this.courseService.findAllCourse();
-		//System.out.println(" ====================");
-		//System.out.println(allCourse);
-		//System.out.println(" ====================");
-
 		return "course/bookpage";
+	}
+	@RequestMapping(value = "userunit", method = RequestMethod.POST)
+	public String userunitPage(Model model) {
+		model.addAttribute("userCourse", new UserCourse());
+		return "selectunit/userunit";
+	}
+    @RequestMapping(value = "userunit/{id}", method = RequestMethod.GET)
+	public String userunit(Model model,@PathVariable("id") Integer id) {
+		UserTerm termId = this.courseService.findByIdUserTerm(id);
+		List<UserCourse> courses = this.courseService.findAllUserCourse(termId);
+		this.courseService.addCourseToUserTerm(courses,termId.getId());
+		return "redirect:selectunit/userunit";
 	}
 
 	@RequestMapping(value = "selectunit", method = RequestMethod.GET)
@@ -77,15 +82,12 @@ public class CourseController {
 	}
 
 
-	/*@RequestMapping(value = "selectuserterm", method = RequestMethod.POST)
-	public String selectUserTerm(@PathVariable Integer id, Model model, Principal principal) {
+	@RequestMapping(value = "selectuserterm", method = RequestMethod.POST)
+	public String selectUserTerm(Model model,Principal principal) {
 		UserTerm userTerm = new UserTerm();
-		UserTerm resultUserTerm = this.courseService.createUserTerm(userTerm,principal.getName());
-		Users email = usersService.findByEmail(principal.getName());
-		courseService.createUserTerm(resultUserTerm,email);
-		model.addAttribute("course", );
-		return "selectcourse/selectcourse";
-	}*/
+		UserTerm resultUserTerm = this.courseService.createUserTerm(userTerm,principal.getName() );
+		return "redirect:/course/selectunit";
+	}
 
 	@RequestMapping(value = "selectuserterm", method = RequestMethod.GET)
 	public String selectUserTermPage(Model model) {

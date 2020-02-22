@@ -36,8 +36,9 @@
             <td th:text="${Course.getUnit()}"></td>
             <td th:text="${#temporals.format(Course.getUpdatedAt(),'yyyy-MM-dd HH:mm')}"></td>
             <td>
-                <form th:object="${Course}" th:action="@{'/selectcourse/{id}'}">
+                <form th:object="${Course}" th:action="@{'/course/userunit/{id}'}">
                     <input type="hidden" th:value="${Course.id}" name="id"/>
+                    <input type="hidden" th:value="${Course.name}" name="name"/>
                     <button class="btn btn-success" type="submit">انتخاب واحد</button>
                 </form>
             </td>

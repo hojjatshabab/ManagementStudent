@@ -11,3 +11,7 @@ INSERT INTO course (id,code,created_at,max,name,unit,updated_at,term_id) VALUES 
 INSERT INTO course (id,code,created_at,max,name,unit,updated_at,term_id) VALUES (300,412563,'2020-01-27 23:11:58',15,'طراحی وب',3,'2020-01-27 23:11:58',20);
 INSERT INTO course (id,code,created_at,max,name,unit,updated_at,term_id) VALUES (400,412563,'2020-01-27 23:11:58',15,'جاوا',3,'2020-01-27 23:11:58',30);
 INSERT INTO course (id,code,created_at,max,name,unit,updated_at,term_id) VALUES (500,412563,'2020-01-27 23:11:58',15,'متن باز',3,'2020-01-27 23:11:58',40);
+INSERT INTO category_tbl (id,created_at,title,updated_at) VALUES (5000,'2020-01-27 23:11:58','اطلاعیه','2020-01-27 23:11:58');
+INSERT INTO category_tbl (id,created_at,title,updated_at) VALUES (5001,'2020-01-27 23:11:58','تغییرات','2020-01-27 23:11:58');
+INSERT INTO category_tbl (id,created_at,title,updated_at) VALUES (5002,'2020-01-27 23:11:58','دانشجویی','2020-01-27 23:11:58');
+

@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Home</title>
+    <div th:replace="fragment/layout::head"></div>
+</head>
+<body class="decore">
+
+<div th:replace="fragment/layout::header"></div>
+
+<div class="container-fluid m-0 p-4">
+    <h1 style="text-align: center">جدول دروس دانشجو</h1>
+
+    <a class="mb-2 btn btn-primary" th:href="@{/course/selectunit}" style="width: 100px;float: right;">
+        افزودن
+    </a>
+
+    <table class="table" >
+        <thead class="thead-light">
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">نام</th>
+            <th scope="col">کد درس</th>
+            <th scope="col">واحد</th>
+            <th scope="col">ترم</th>
+            <th scope="col">عملگرها</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="UserCourse : ${userCourse}">
+            <td th:text="${UserCourse.getId()}"></td>
+            <td scope="row" th:text="${UserCourse.getName()}"></td>
+            <td th:text="${UserCourse.getCode()}"></td>
+            <td th:text="${UserCourse.getUnit()}"></td>
+            <td>
+                <ul>
+                    <li style="direction: rtl;" th:each="Term : ${UserCourse.term}" th:text="${Term.title}"></li>
+                </ul>
+            </td>
+            <td>
+                <a class="btn btn-danger" th:href="@{/course/delete/{id}(id=${UserCourse.getId()})}" style="width: 80px">حذف</a>
+            </td>
+        </tr>
+
+        </tbody>
+    </table>
+
+</div>
+
+
+</body></html>
